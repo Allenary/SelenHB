@@ -27,7 +27,8 @@ public class LocatingCustomElementListHandler implements InvocationHandler{
          List<IElement> customs = new ArrayList<IElement>();
 
          for (WebElement element : elements) {
-             customs.add(WrapperFactory.createInstance(clazz, element));
+             //customs.add(WrapperFactory.createInstance(clazz, element));
+        	 customs.add(new ElementFactory().create(clazz, element));
          }
          try {
              return method.invoke(customs, objects);
