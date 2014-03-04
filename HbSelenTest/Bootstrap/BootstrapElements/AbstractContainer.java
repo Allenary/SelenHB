@@ -16,7 +16,7 @@ public  class AbstractContainer implements IContainer {
 	@Override
 	public void init(WebElement element) {
 		this.element=element;
-		Log.info(this.getClass().getName()+": "+element.getText());
+//		Log.info(this.getClass().getName()+": "+element.getText());
 	}
 	
 }
