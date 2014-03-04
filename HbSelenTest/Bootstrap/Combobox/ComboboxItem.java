@@ -17,5 +17,7 @@ public class ComboboxItem extends AbstractElement {
 	public void select(){
 		element.click();
 	}
-	
+	public boolean isSelected(){
+		return element.getAttribute("class").toLowerCase().contains("result-selected");
+	}
 }

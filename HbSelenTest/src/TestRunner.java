@@ -17,7 +17,6 @@ public class TestRunner {
 		PageAdd page = new PageAdd();
 		page.init(w);
 		page.comboOpen();
-
 		
 	}
 
