@@ -1,22 +1,29 @@
 package BootstrapElements;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.seleniumhq.jetty7.util.log.Log;
 
 public class LocatingCustomElementListHandler implements InvocationHandler{
 	 private final ElementLocator locator;
-     private final Class<IElement> clazz;
+     private final Class<?> clazz;
+     private final Field field;
 
      public LocatingCustomElementListHandler(ElementLocator locator, 
-                     Class<IElement> clazz) {
+                     Field field) {
          this.locator = locator;
-         this.clazz = clazz;
+         clazz = (Class<?>) ((ParameterizedType) field.getGenericType()).
+                 getActualTypeArguments()[0];
+         this.field=field;
+         
      }
      @Override
      public Object invoke(Object object, Method method, 
@@ -24,11 +31,28 @@ public class LocatingCustomElementListHandler implements InvocationHandler{
          // Ќаходит список WebElement и обрабатывает каждый его элемент,
          // возвращает новый список с элементами кастомного класса
          List<WebElement> elements = locator.findElements();
-         List<IElement> customs = new ArrayList<IElement>();
-
-         for (WebElement element : elements) {
-             //customs.add(WrapperFactory.createInstance(clazz, element));
-        	 customs.add(new ElementFactory().create(clazz, element));
+         List<IElement> customsElem = new ArrayList<IElement>();
+         List<IContainer> customsContainer = new ArrayList<IContainer>();
+         List<?> customs=null;
+         Log.info("clazz="+clazz);
+         
+         if(IContainer.class.isAssignableFrom(clazz)){
+        	 Log.info("This is message in container");
+	         for (WebElement element : elements) {
+	        	 customsContainer.add(new ContainerFactory().create((Class<IContainer>)clazz, element));
+	        	 Log.info("Container "+clazz.getName()+" "+element.getText() );
+	         }
+	         customs=customsContainer;
+	         return method.invoke(customs, objects);
+         }
+         if(IElement.class.isAssignableFrom(clazz)){
+        	 Log.info("This is message in element");
+        	 for (WebElement element : elements) {
+	        	 customsElem.add(new ElementFactory().create((Class<IElement>)clazz, element));
+	        	 Log.info("element "+clazz.getName()+" "+element.getText() );
+	         }
+	         customs=customsElem;
+	         return method.invoke(customs, objects);
          }
          try {
              return method.invoke(customs, objects);

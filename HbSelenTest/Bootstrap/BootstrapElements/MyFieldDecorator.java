@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.seleniumhq.jetty7.util.log.Log;
 
 
 public class MyFieldDecorator extends DefaultFieldDecorator {
@@ -37,16 +38,14 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
         return super.decorate(loader, field);
     }
 	@SuppressWarnings("unchecked")
-	private List<IElement> decorateList(ClassLoader loader, Field field) {
-//		  protected  createList(ClassLoader loader, 
-//                  ElementLocator locator, 
-//                  Class<IElement> clazz) {
+	private List<?> decorateList(ClassLoader loader, Field field) {
+
 		ElementLocator locator = factory.createLocator(field);
-		Class<IElement> clazz = (Class<IElement>) ((ParameterizedType) field.getGenericType()).
+		Class<?> clazz = (Class<?>) ((ParameterizedType) field.getGenericType()).
                 getActualTypeArguments()[0];
-InvocationHandler handler = 
-new LocatingCustomElementListHandler(locator, clazz);
-		List<IElement> elements =(List<IElement>) Proxy.newProxyInstance(
+		Log.info("getActualTypeArguments"+((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0]);
+		InvocationHandler handler = new LocatingCustomElementListHandler(locator, field);
+		List<?> elements =(List<?>) Proxy.newProxyInstance(
 						loader, new Class[] {List.class}, handler);
 		return elements;
 
