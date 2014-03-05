@@ -22,11 +22,19 @@ public class PageAdd implements IPage {
 		PageFactory.initElements(new MyFieldDecorator(driver), this);
 	}
 	public void comboOpen(){
+		Log.info("text in combo before click: "+combo.getText());
 		combo.selectOption(1);
+		Log.info("text in combo after click: "+combo.getText());
 		Log.info("count items in combo: "+combo.countItems());
 	}
 	public void countCombos(){
 		Log.info("combos count="+combos.size());
 	}
-
+	public void selectFirstOptionInAllCombos(){
+		Combobox c=combos.get(1);
+		Log.info("Combos(1)="+c.getText());
+//		for (Combobox c: combos){
+//			c.selectOption(1);
+//		}
+	}
 }

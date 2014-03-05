@@ -9,9 +9,13 @@ public class ComboboxHead extends AbstractElement {
 
 	public ComboboxHead(WebElement element)  {
 		super(element);
+		Log.info("combohead"+element.getText());
 	}
 	public void open(){
 		element.click();
+	}
+	public String getText(){
+		return element.getText();
 	}
 
 }

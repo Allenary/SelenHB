@@ -23,6 +23,7 @@ public class LocatingCustomElementListHandler implements InvocationHandler{
          clazz = (Class<?>) ((ParameterizedType) field.getGenericType()).
                  getActualTypeArguments()[0];
          this.field=field;
+         //Log.info("MyList: "+this.clazz.getName()+" IsAssignable for container: "+IContainer.class.isAssignableFrom(clazz));
          
      }
      @Override
@@ -39,8 +40,10 @@ public class LocatingCustomElementListHandler implements InvocationHandler{
          if(IContainer.class.isAssignableFrom(clazz)){
         	 Log.info("This is message in container");
 	         for (WebElement element : elements) {
+	             //customs.add(WrapperFactory.createInstance(clazz, element));
 	        	 customsContainer.add(new ContainerFactory().create((Class<IContainer>)clazz, element));
 	        	 Log.info("Container "+clazz.getName()+" "+element.getText() );
+	        	 //customs.add((new MyFieldDecorator(element));
 	         }
 	         customs=customsContainer;
 	         return method.invoke(customs, objects);
@@ -48,8 +51,10 @@ public class LocatingCustomElementListHandler implements InvocationHandler{
          if(IElement.class.isAssignableFrom(clazz)){
         	 Log.info("This is message in element");
         	 for (WebElement element : elements) {
+	             //customs.add(WrapperFactory.createInstance(clazz, element));
 	        	 customsElem.add(new ElementFactory().create((Class<IElement>)clazz, element));
 	        	 Log.info("element "+clazz.getName()+" "+element.getText() );
+	        	 //customs.add((new MyFieldDecorator(element));
 	         }
 	         customs=customsElem;
 	         return method.invoke(customs, objects);

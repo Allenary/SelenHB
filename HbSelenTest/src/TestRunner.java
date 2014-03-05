@@ -16,8 +16,10 @@ public class TestRunner {
 		w.get("http://fortest.resscode.org.ua/hb/outtransactions/add");
 		PageAdd page = new PageAdd();
 		page.init(w);
+		
 		page.comboOpen();
 		page.countCombos();
+		page.selectFirstOptionInAllCombos();
 	}
 
 }

@@ -20,7 +20,8 @@ public class Combobox extends AbstractContainer{
 	}
 	public int countItems(){
 		return comboItems.size();
-//		return 0;
 	}
-
+	public String getText(){
+		return head.getText();
+	}
 }
