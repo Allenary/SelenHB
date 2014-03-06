@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
  * 2014/03/03
  * can be simply "BootstrapButton", not "AbstractButton"
  */
-public class AbstractButton extends AbstractElement{
+public class BButton extends AbstractElement{
 
-	public AbstractButton(WebElement element) {
+	public BButton(WebElement element) {
 		super(element);
 	}
 	public void click(){

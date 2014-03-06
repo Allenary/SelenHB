@@ -18,6 +18,7 @@ public class TestRunner {
 		
 		page.countCombos();
 		page.selectFirstOptionInAllCombos();
+		page.saveAndGoBack();
 	}
 
 }

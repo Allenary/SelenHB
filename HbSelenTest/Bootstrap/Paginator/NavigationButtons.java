@@ -2,18 +2,18 @@ package Paginator;
 
 import org.openqa.selenium.support.FindBy;
 
-import BootstrapElements.AbstractButton;
+import BootstrapElements.BButton;
 import BootstrapElements.AbstractContainer;
 
 public class NavigationButtons extends AbstractContainer{
 	@FindBy(className="first-button")
-	private AbstractButton first;
+	private BButton first;
 	@FindBy(className="last-button")
-	private AbstractButton last;
+	private BButton last;
 	@FindBy(className="next-button")
-	private AbstractButton next;
+	private BButton next;
 	@FindBy(className="prev-button")
-	private AbstractButton previous;
+	private BButton previous;
 	
 	public boolean last(){
 		return last.smartClick();
