@@ -23,6 +23,6 @@ public class Combobox extends AbstractContainer{
 	}
 	@Override
 	public String getText(){
-		return "headtext";//head.getText();
+		return head.getText();
 	}
 }

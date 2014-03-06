@@ -41,7 +41,7 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
         return super.decorate(loader, field);
     }
 	@SuppressWarnings("unchecked")
-	private List<?> decorateList(ClassLoader loader, Field field) {
+	private List<?> decorateList2(ClassLoader loader, Field field) {
 
 		Class<?> clazz = (Class<?>) ((ParameterizedType) field.getGenericType()).
                 getActualTypeArguments()[0];
@@ -56,8 +56,9 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
 				IContainer cont=containerFactory.create((Class<? extends IContainer>)((ParameterizedType) field.getGenericType()).
 		                getActualTypeArguments()[0], e);
 				Log.info("container: "+((Combobox)cont).getText());
-				containers.add(cont);
 				PageFactory.initElements(new MyFieldDecorator(e), cont);
+				containers.add(cont);
+				
 			}
 			return containers;
 		}
@@ -72,6 +73,31 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
 
 	}
 
+	private List<?> decorateList(ClassLoader loader, Field field) {
+
+		Class<?> clazz = (Class<?>) ((ParameterizedType) field.getGenericType()).
+                getActualTypeArguments()[0];
+		Log.info("getActualTypeArguments"+clazz);
+//		InvocationHandler handler = new LocatingCustomElementListHandler(locator, field);
+		List<IContainer> containers = new ArrayList<IContainer>();
+		List<IElement> elements = new ArrayList<IElement>();
+		List<WebElement> listElements = proxyForListLocator(loader, createLocator(field));
+		if(IContainer.class.isAssignableFrom(clazz)){
+			for(WebElement e:listElements){
+				containers.add(decorateContainer(loader,e,clazz));
+			}
+			return containers;
+		}
+		if(IElement.class.isAssignableFrom(clazz)){
+			for(WebElement e:listElements){
+				elements.add(elementFactory.create((Class<? extends IElement>)((ParameterizedType) field.getGenericType()).
+                getActualTypeArguments()[0], e));
+			}
+			return elements;
+		}
+		return null;
+
+	}
 	@SuppressWarnings("unchecked")
 	private Object decorateElement(final ClassLoader loader, final Field field) {
         final WebElement wrappedElement = proxyForLocator(loader, createLocator(field));
@@ -79,12 +105,15 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
     }
 
     @SuppressWarnings("unchecked")
-	private Object decorateContainer(final ClassLoader loader, final Field field) {
-        final WebElement wrappedElement = proxyForLocator(loader, createLocator(field));
-        final IContainer container = containerFactory.create((Class<? extends IContainer>) field.getType(), wrappedElement);
+	private IContainer decorateContainer(final ClassLoader loader, final WebElement wrappedElement,final Class<?>  clazz ) {
+        final IContainer container = containerFactory.create((Class<IContainer>) clazz, wrappedElement);
 
         PageFactory.initElements(new MyFieldDecorator(wrappedElement), container);
         return container;
+    }
+    private IContainer decorateContainer(final ClassLoader loader, final Field field) {
+        final WebElement wrappedElement = proxyForLocator(loader, createLocator(field));
+        return decorateContainer(loader,wrappedElement,(Class<? extends IContainer>) field.getType());
     }
     private ElementLocator createLocator(final Field field) {
         return factory.createLocator(field);

@@ -1,14 +1,17 @@
 package BootstrapElements;
 
-import java.util.logging.Logger;
-
 import org.openqa.selenium.WebElement;
 import org.seleniumhq.jetty7.util.log.Log;
 
 public  class AbstractContainer implements IContainer {
 	private WebElement element;
 	
-	
+	public AbstractContainer(){
+		
+	}
+	public AbstractContainer(WebElement element){
+		init(element);
+	}
 	@Override
 	public boolean isDisplayed() {
 		 return element.isDisplayed();
