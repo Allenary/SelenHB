@@ -1,9 +1,7 @@
 package BootstrapElements;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-import org.seleniumhq.jetty7.util.log.Log;
-
-import Combobox.Combobox;
 
 
 public class MyFieldDecorator extends DefaultFieldDecorator {
@@ -41,44 +36,10 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
         return super.decorate(loader, field);
     }
 	@SuppressWarnings("unchecked")
-	private List<?> decorateList2(ClassLoader loader, Field field) {
-
-		Class<?> clazz = (Class<?>) ((ParameterizedType) field.getGenericType()).
-                getActualTypeArguments()[0];
-		Log.info("getActualTypeArguments"+clazz);
-//		InvocationHandler handler = new LocatingCustomElementListHandler(locator, field);
-		List<IContainer> containers = new ArrayList<IContainer>();
-		List<IElement> elements = new ArrayList<IElement>();
-		List<WebElement> listElements = proxyForListLocator(loader, createLocator(field));
-		if(IContainer.class.isAssignableFrom(clazz)){
-			for(WebElement e:listElements){
-				Log.info("WebElement: "+e.getText());
-				IContainer cont=containerFactory.create((Class<? extends IContainer>)((ParameterizedType) field.getGenericType()).
-		                getActualTypeArguments()[0], e);
-				Log.info("container: "+((Combobox)cont).getText());
-				PageFactory.initElements(new MyFieldDecorator(e), cont);
-				containers.add(cont);
-				
-			}
-			return containers;
-		}
-		if(IElement.class.isAssignableFrom(clazz)){
-			for(WebElement e:listElements){
-				elements.add(elementFactory.create((Class<? extends IElement>)((ParameterizedType) field.getGenericType()).
-                getActualTypeArguments()[0], e));
-			}
-			return elements;
-		}
-		return null;
-
-	}
-
 	private List<?> decorateList(ClassLoader loader, Field field) {
 
 		Class<?> clazz = (Class<?>) ((ParameterizedType) field.getGenericType()).
                 getActualTypeArguments()[0];
-		Log.info("getActualTypeArguments"+clazz);
-//		InvocationHandler handler = new LocatingCustomElementListHandler(locator, field);
 		List<IContainer> containers = new ArrayList<IContainer>();
 		List<IElement> elements = new ArrayList<IElement>();
 		List<WebElement> listElements = proxyForListLocator(loader, createLocator(field));
@@ -95,7 +56,7 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
 			}
 			return elements;
 		}
-		return null;
+		return listElements;
 
 	}
 	@SuppressWarnings("unchecked")
@@ -111,7 +72,8 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
         PageFactory.initElements(new MyFieldDecorator(wrappedElement), container);
         return container;
     }
-    private IContainer decorateContainer(final ClassLoader loader, final Field field) {
+    @SuppressWarnings("unchecked")
+	private IContainer decorateContainer(final ClassLoader loader, final Field field) {
         final WebElement wrappedElement = proxyForLocator(loader, createLocator(field));
         return decorateContainer(loader,wrappedElement,(Class<? extends IContainer>) field.getType());
     }

@@ -1,7 +1,6 @@
 package Paginator;
 
 import org.openqa.selenium.support.FindBy;
-import org.seleniumhq.jetty7.util.log.Log;
 
 import BootstrapElements.AbstractContainer;
 import BootstrapElements.BLabel;

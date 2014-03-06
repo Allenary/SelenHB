@@ -2,11 +2,9 @@ package Combobox;
 
 import java.util.List;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import BootstrapElements.AbstractContainer;
-import BootstrapElements.AbstractElement;
 
 public class Combobox extends AbstractContainer{
 	@FindBy(className="chzn-single")
@@ -24,5 +22,15 @@ public class Combobox extends AbstractContainer{
 	@Override
 	public String getText(){
 		return head.getText();
+	}
+	/*
+	 * this function can be unused in future
+	 */
+	protected String getOptionsText(){
+		String tmp="";
+		for(ComboboxItem i:comboItems){
+			tmp+=i.getValue()+" ";
+		}
+		return tmp;
 	}
 }

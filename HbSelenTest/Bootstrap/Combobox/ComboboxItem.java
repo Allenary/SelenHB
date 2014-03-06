@@ -10,6 +10,9 @@ public class ComboboxItem extends AbstractElement {
 		super(element);
 	}
 
+	/*
+	 * value will returned only in case element is displayed on page
+	 */
 	public String getValue(){
 		return element.getText();
 	}
