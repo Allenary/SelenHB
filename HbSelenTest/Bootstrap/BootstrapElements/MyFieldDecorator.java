@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.SearchContext;
@@ -13,6 +14,8 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.seleniumhq.jetty7.util.log.Log;
+
+import Combobox.Combobox;
 
 
 public class MyFieldDecorator extends DefaultFieldDecorator {
@@ -40,14 +43,32 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
 	@SuppressWarnings("unchecked")
 	private List<?> decorateList(ClassLoader loader, Field field) {
 
-		ElementLocator locator = factory.createLocator(field);
 		Class<?> clazz = (Class<?>) ((ParameterizedType) field.getGenericType()).
                 getActualTypeArguments()[0];
-		Log.info("getActualTypeArguments"+((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0]);
-		InvocationHandler handler = new LocatingCustomElementListHandler(locator, field);
-		List<?> elements =(List<?>) Proxy.newProxyInstance(
-						loader, new Class[] {List.class}, handler);
-		return elements;
+		Log.info("getActualTypeArguments"+clazz);
+//		InvocationHandler handler = new LocatingCustomElementListHandler(locator, field);
+		List<IContainer> containers = new ArrayList<IContainer>();
+		List<IElement> elements = new ArrayList<IElement>();
+		List<WebElement> listElements = proxyForListLocator(loader, createLocator(field));
+		if(IContainer.class.isAssignableFrom(clazz)){
+			for(WebElement e:listElements){
+				Log.info("WebElement: "+e.getText());
+				IContainer cont=containerFactory.create((Class<? extends IContainer>)((ParameterizedType) field.getGenericType()).
+		                getActualTypeArguments()[0], e);
+				Log.info("container: "+((Combobox)cont).getText());
+				containers.add(cont);
+				PageFactory.initElements(new MyFieldDecorator(e), cont);
+			}
+			return containers;
+		}
+		if(IElement.class.isAssignableFrom(clazz)){
+			for(WebElement e:listElements){
+				elements.add(elementFactory.create((Class<? extends IElement>)((ParameterizedType) field.getGenericType()).
+                getActualTypeArguments()[0], e));
+			}
+			return elements;
+		}
+		return null;
 
 	}
 

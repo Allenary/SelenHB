@@ -21,7 +21,8 @@ public class Combobox extends AbstractContainer{
 	public int countItems(){
 		return comboItems.size();
 	}
+	@Override
 	public String getText(){
-		return head.getText();
+		return "headtext";//head.getText();
 	}
 }

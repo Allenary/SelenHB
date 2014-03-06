@@ -18,5 +18,9 @@ public  class AbstractContainer implements IContainer {
 		this.element=element;
 //		Log.info(this.getClass().getName()+": "+element.getText());
 	}
+	@Override
+	public String getText() {
+		return element.getText();
+	}
 	
 }

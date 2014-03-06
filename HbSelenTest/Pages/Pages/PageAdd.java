@@ -31,10 +31,11 @@ public class PageAdd implements IPage {
 		Log.info("combos count="+combos.size());
 	}
 	public void selectFirstOptionInAllCombos(){
-		Combobox c=combos.get(1);
-		Log.info("Combos(1)="+c.getText());
-//		for (Combobox c: combos){
-//			c.selectOption(1);
-//		}
+//		Combobox c=combos.get(1);
+//		Log.info("Combos(1)="+c.getText());
+		for (Combobox c: combos){
+			Log.info("selectFirstOptionInAllCombos: "+ c.getText());
+			c.selectOption(1);
+		}
 	}
 }
