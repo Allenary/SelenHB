@@ -2,7 +2,7 @@ package Combobox;
 
 import org.openqa.selenium.WebElement;
 
-import BootstrapElements.AbstractElement;
+import BootstrapCore.AbstractElement;
 
 public class ComboboxItem extends AbstractElement {
 

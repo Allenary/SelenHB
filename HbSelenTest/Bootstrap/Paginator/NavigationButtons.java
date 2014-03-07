@@ -2,8 +2,8 @@ package Paginator;
 
 import org.openqa.selenium.support.FindBy;
 
+import BootstrapCore.AbstractContainer;
 import BootstrapElements.BButton;
-import BootstrapElements.AbstractContainer;
 
 public class NavigationButtons extends AbstractContainer{
 	@FindBy(className="first-button")

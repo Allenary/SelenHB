@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.support.FindBy;
 
-import BootstrapElements.AbstractContainer;
+import BootstrapCore.AbstractContainer;
 
 public class Combobox extends AbstractContainer{
 	@FindBy(className="chzn-single")

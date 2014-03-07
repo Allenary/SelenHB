@@ -2,6 +2,8 @@ package BootstrapElements;
 
 import org.openqa.selenium.support.FindBy;
 
+import BootstrapCore.AbstractContainer;
+
 public class AddOptionsButtons extends AbstractContainer{
 	@FindBy(className="submit-form")
 	private BButton save;
@@ -12,6 +14,9 @@ public class AddOptionsButtons extends AbstractContainer{
 	
 	public void saveAndGoBackToList(){
 		saveAndGoBack.click();
+	}
+	public void save(){
+		save.click();
 	}
 
 }

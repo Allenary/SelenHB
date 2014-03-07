@@ -1,6 +1,7 @@
-package BootstrapElements;
+package BootstrapCore;
 
 import org.openqa.selenium.WebElement;
+
 
 public class ContainerFactory implements IContainerFactory{
 

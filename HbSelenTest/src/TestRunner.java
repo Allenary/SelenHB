@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.seleniumhq.jetty7.util.log.Log;
 
 import Pages.PageAdd;
 
@@ -19,6 +20,8 @@ public class TestRunner {
 		page.countCombos();
 		page.setName("test");
 		page.selectFirstOptionInAllCombos();
+		page.save();
+//		Log.info("message="+page.getModalMessage());
 //		page.saveAndGoBack();
 	}
 

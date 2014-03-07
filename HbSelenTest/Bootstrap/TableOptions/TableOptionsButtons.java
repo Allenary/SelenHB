@@ -2,7 +2,7 @@ package TableOptions;
 
 import org.openqa.selenium.support.FindBy;
 
-import BootstrapElements.AbstractContainer;
+import BootstrapCore.AbstractContainer;
 import BootstrapElements.BButton;
 
 public class TableOptionsButtons extends AbstractContainer{

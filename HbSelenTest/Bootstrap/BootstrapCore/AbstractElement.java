@@ -1,6 +1,7 @@
-package BootstrapElements;
+package BootstrapCore;
 
 import org.openqa.selenium.WebElement;
+
 
 public abstract class AbstractElement implements IElement{
 	protected final WebElement element;

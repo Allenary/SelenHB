@@ -2,6 +2,8 @@ package BootstrapElements;
 
 import org.openqa.selenium.WebElement;
 
+import BootstrapCore.AbstractElement;
+
 /*
  * 2014/03/03
  * can be simply "BootstrapButton", not "AbstractButton"

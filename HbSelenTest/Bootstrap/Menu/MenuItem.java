@@ -2,7 +2,7 @@ package Menu;
 
 import org.openqa.selenium.WebElement;
 
-import BootstrapElements.AbstractElement;
+import BootstrapCore.AbstractElement;
 
 public class MenuItem extends AbstractElement{
 

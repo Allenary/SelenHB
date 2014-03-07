@@ -1,4 +1,4 @@
-package BootstrapElements;
+package BootstrapCore;
 
 public interface IElement {
 	boolean isDisplayed();

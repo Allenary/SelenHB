@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.seleniumhq.jetty7.util.log.Log;
 
-import BootstrapElements.MyFieldDecorator;
+import BootstrapCore.MyFieldDecorator;
 import Paginator.NavigationButtons;
 import Paginator.RowsInfo;
 import TableOptions.TableOptionsButtons;

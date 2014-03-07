@@ -1,4 +1,4 @@
-package BootstrapElements;
+package BootstrapCore;
 
 import org.openqa.selenium.WebElement;
 
