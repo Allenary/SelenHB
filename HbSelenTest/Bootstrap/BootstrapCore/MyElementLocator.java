@@ -1,0 +1,20 @@
+package BootstrapCore;
+
+import java.lang.reflect.Field;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocator;
+
+public class MyElementLocator extends AjaxElementLocator {
+
+	public MyElementLocator(WebDriver driver, Field field,
+			int timeOutInSeconds) {
+		super(driver, field, timeOutInSeconds);
+	}
+
+	@Override
+	protected boolean isElementUsable(WebElement element) {
+        return element.isDisplayed();
+  }
+}

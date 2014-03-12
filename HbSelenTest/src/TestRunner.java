@@ -21,7 +21,7 @@ public class TestRunner {
 		page.setName("test");
 		page.selectFirstOptionInAllCombos();
 		page.save();
-//		Log.info("message="+page.getModalMessage());
+		Log.info("message="+page.getModalMessage());
 //		page.saveAndGoBack();
 	}
 

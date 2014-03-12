@@ -8,6 +8,7 @@ import java.util.List;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -17,9 +18,10 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 public class MyFieldDecorator extends DefaultFieldDecorator {
 	private IElementFactory elementFactory = new ElementFactory();
     private IContainerFactory containerFactory = new ContainerFactory();
+    private final static int delay=60;
     
 	public MyFieldDecorator(SearchContext searchContext) {
-		super(new DefaultElementLocatorFactory(searchContext));
+		super(new AjaxElementLocatorFactory(searchContext,delay));
 	}
 
 	@Override
@@ -79,6 +81,6 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
         return decorateContainer(loader,wrappedElement,(Class<? extends IContainer>) field.getType());
     }
     private ElementLocator createLocator(final Field field) {
-        return factory.createLocator(field);
+    	return factory.createLocator(field);
     }
 }

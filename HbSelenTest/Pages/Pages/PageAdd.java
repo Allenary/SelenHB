@@ -23,13 +23,14 @@ public class PageAdd implements IPage {
 	BTextbox name;
 	@FindBy(id="crudForm")
 	AddOptionsButtons control;	
+	@FindBy(className="modal-message")
 	ModalMessage message;
 	//needed for finding element after element load..
-	private WebDriver driver;
+//	private WebDriver driver;
 	
 	public void init(WebDriver driver){
 		//adding driver looks like hack
-		this.driver=driver;
+		//this.driver=driver;
 		PageFactory.initElements(new MyFieldDecorator(driver), this);
 	}
 	public void setName(String str){
@@ -52,9 +53,9 @@ public class PageAdd implements IPage {
 	}
 	//all crap in this class happens because of this:
 	public String getModalMessage(){
-		WebElement elem = (new WebDriverWait(driver,60))
-				.until(ExpectedConditions.presenceOfElementLocated(By.className("modal-message")));
-		message.init(elem);
+//		WebElement elem = (new WebDriverWait(driver,60))
+//				.until(ExpectedConditions.presenceOfElementLocated(By.className("modal-message")));
+//		message.init(elem);
 		return message.getMessageText();
 	}
 }
