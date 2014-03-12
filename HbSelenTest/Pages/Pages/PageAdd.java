@@ -25,8 +25,6 @@ public class PageAdd implements IPage {
 	AddOptionsButtons control;	
 	@FindBy(className="modal-message")
 	ModalMessage message;
-	//needed for finding element after element load..
-//	private WebDriver driver;
 	
 	public void init(WebDriver driver){
 		//adding driver looks like hack
@@ -51,11 +49,8 @@ public class PageAdd implements IPage {
 	public void save(){
 		control.save();
 	}
-	//all crap in this class happens because of this:
+
 	public String getModalMessage(){
-//		WebElement elem = (new WebDriverWait(driver,60))
-//				.until(ExpectedConditions.presenceOfElementLocated(By.className("modal-message")));
-//		message.init(elem);
 		return message.getMessageText();
 	}
 }
