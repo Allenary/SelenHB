@@ -25,7 +25,6 @@ public class BButton extends AbstractElement{
 	public boolean isEnabled(){
 		boolean isDisabled = element.getAttribute("class").toLowerCase().contains("disabled");
 		return !isDisabled;
-		
 	}
 	public boolean smartClick(){
 		boolean isClicked=isEnabled();

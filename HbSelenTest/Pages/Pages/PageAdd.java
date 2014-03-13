@@ -27,12 +27,13 @@ public class PageAdd implements IPage {
 	ModalMessage message;
 	
 	public void init(WebDriver driver){
-		//adding driver looks like hack
-		//this.driver=driver;
 		PageFactory.initElements(new MyFieldDecorator(driver), this);
 	}
 	public void setName(String str){
 		name.setText(str);
+	}
+	public String getName(){
+		return name.getText();
 	}
 	
 	public int countCombos(){
@@ -41,6 +42,14 @@ public class PageAdd implements IPage {
 	public void selectFirstOptionInAllCombos(){
 		for (Combobox c: combos){
 			c.selectOption(1);
+		}
+	}
+	/*
+	 * can causes issue if checkbox already unselected
+	 */
+	public void uselectAllCombos(){
+		for (Combobox c: combos){
+			c.unselect();
 		}
 	}
 	public void saveAndGoBack(){
@@ -52,5 +61,11 @@ public class PageAdd implements IPage {
 
 	public String getModalMessage(){
 		return message.getMessageText();
+	}
+	public void goToEdit(){
+		message.goToEdit();
+	}
+	public void goToList(){
+		message.goToList();
 	}
 }

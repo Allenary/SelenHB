@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.seleniumhq.jetty7.util.log.Log;
@@ -20,8 +21,11 @@ public class TestRunner {
 		page.countCombos();
 		page.setName("test");
 		page.selectFirstOptionInAllCombos();
+		page.uselectAllCombos();
 		page.save();
+		Assert.assertTrue(page.getModalMessage().contains("Your data has been successfully stored into the database"));
 		Log.info("message="+page.getModalMessage());
+		page.goToEdit();
 //		page.saveAndGoBack();
 	}
 

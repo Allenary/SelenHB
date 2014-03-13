@@ -15,5 +15,10 @@ public class ModalMessage extends AbstractContainer{
 	public String getMessageText(){
 		return message.getText();
 	}
-
+	public void goToEdit(){
+		edit.click();
+	}
+	public void goToList(){
+		goToList.click();
+	}
 }

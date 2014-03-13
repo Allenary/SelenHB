@@ -15,5 +15,8 @@ public class BTextbox extends AbstractElement{
 	public String getText(){
 		return element.getText();
 	}
+	public boolean isEmpty(){
+		return getText().isEmpty();
+	}
 
 }
