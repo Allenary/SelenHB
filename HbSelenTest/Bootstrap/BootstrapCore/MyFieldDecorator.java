@@ -9,7 +9,6 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -18,7 +17,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 public class MyFieldDecorator extends DefaultFieldDecorator {
 	private IElementFactory elementFactory = new ElementFactory();
     private IContainerFactory containerFactory = new ContainerFactory();
-    private final static int delay=60;
+    private final static int delay=10;
     
 	public MyFieldDecorator(SearchContext searchContext) {
 		super(new AjaxElementLocatorFactory(searchContext,delay));

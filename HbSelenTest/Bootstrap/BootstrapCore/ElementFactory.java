@@ -19,6 +19,7 @@ public class ElementFactory implements IElementFactory{
 	/*
 	 * why I need this?
 	 */
+	@SuppressWarnings("unchecked")
 	private <E extends IElement> Class<? extends E> findImplementationFor(final Class<E> elementClass) {
         try {
             return (Class<? extends E>) Class.forName(elementClass.getName());
