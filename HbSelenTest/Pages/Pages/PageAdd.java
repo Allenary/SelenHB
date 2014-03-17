@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.seleniumhq.jetty7.util.log.Log;
 
 import BootstrapCore.MyFieldDecorator;
 import BootstrapElements.AddOptionsButtons;
@@ -45,10 +44,7 @@ public class PageAdd implements IPage {
 	}
 	public void selectFirstOptionInAllCombos(){
 		for (Combobox c: combos){
-			Log.info("PageAdd:"+c.getOptionsText());
-			Log.info("isSelected (before select): "+c.isSelected());
 			c.selectOption(1);
-			Log.info("isSelected (after select): "+c.isSelected()+" text="+c.getText()+" value="+c.getSelectedValue());
 		}
 	}
 	/*
@@ -57,7 +53,6 @@ public class PageAdd implements IPage {
 	public void uselectAllCombos(){
 		for (Combobox c: combos){		
 			c.unselect();
-			Log.info("isSelected (after unselect): "+c.isSelected()+" text="+c.getText()+" value="+c.getSelectedValue());
 		}
 	}
 	public void saveAndGoBack(){

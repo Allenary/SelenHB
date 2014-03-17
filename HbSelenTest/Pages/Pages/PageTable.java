@@ -3,7 +3,6 @@ package Pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.seleniumhq.jetty7.util.log.Log;
 
 import BootstrapCore.MyFieldDecorator;
 import Paginator.NavigationButtons;
@@ -26,7 +25,7 @@ public class PageTable implements IPage {
 		options.clickAdd();
 	}
 	public void lastPageTable(){
-		boolean stat = nav.last();
+		nav.last();
 	}
 	public String getAllRowsStat(){
 		return "First row index: "+rowsInfo.firstRowOnPage()+

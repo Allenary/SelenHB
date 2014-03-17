@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.seleniumhq.jetty7.util.log.Log;
 
 import BootstrapCore.AbstractContainer;
 
@@ -34,10 +33,8 @@ public class Combobox extends AbstractContainer{
 	
 	public String getSelectedValue(){
 		String result="";
-		Log.info(getOptionsText());
 		for (ComboboxItem ci: comboItems){
 			if (ci.isSelected()){
-				Log.info("there is selected value:"+ci.getValue());
 				result=ci.getValue();
 			}
 		}
