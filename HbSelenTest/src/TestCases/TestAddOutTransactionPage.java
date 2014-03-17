@@ -1,9 +1,9 @@
 package TestCases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -24,6 +24,13 @@ public class TestAddOutTransactionPage {
 	@Test
 	public void verifyTitle() {
 		assertEquals("Wrong Title", page.getTitle(), page.getExpectedPageTitle());
+	}
+	@Test
+	public void saveTransactionWithData(){
+		page.setName("test");
+		page.selectFirstOptionInAllCombos();
+		page.save();
+		assertTrue(page.getModalMessage().contains("Your data has been successfully stored into the database"));
 	}
 
 }
