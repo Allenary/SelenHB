@@ -25,7 +25,7 @@ public class TestAddOutTransactionPage {
 		page.init(w);
 	}
 	
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void verifyTitle() {
 		assertEquals("Wrong Title", page.getTitle(), page.getExpectedPageTitle());
 	}
@@ -42,9 +42,16 @@ public class TestAddOutTransactionPage {
 	@Test(dataProvider = "getTestData")
 	public void saveTransactionWithData(String testValue){
 		page.setName(testValue);
-		//page.selectFirstOptionInAllCombos();
+		page.selectFirstOptionInAllCombos();
 		page.save();
 		assertTrue(page.getModalMessage().contains("Your data has been successfully stored into the database"));
+		//bad fix, need to think more
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/*
@@ -52,7 +59,7 @@ public class TestAddOutTransactionPage {
 	 */
 	@AfterClass
 	public static void postSteps(){
-		w.close();
+		w.quit();
 	}
 	
 }
