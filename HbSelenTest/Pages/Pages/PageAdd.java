@@ -26,7 +26,11 @@ public class PageAdd implements IPage {
 	@FindBy(css="h1")
 	BLabel actualTitle;
 	
+	private String url="http://fortest.resscode.org.ua/hb/outtransactions/add";
+	
+	
 	public void init(WebDriver driver){
+		driver.get(url);
 		PageFactory.initElements(new MyFieldDecorator(driver), this);
 	}
 	public void setName(String str){
