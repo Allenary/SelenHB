@@ -1,6 +1,7 @@
 package Pages;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -15,16 +16,16 @@ import Combobox.Combobox;
 
 public class PageAdd implements IPage {
 	@FindBy(className="chzn-container-single")
-	List<Combobox> combos;
+	public List<Combobox> combos;
 	@FindBy(id="field-name")
-	BTextbox name;
+	private BTextbox name;
 	@FindBy(id="crudForm")
-	AddOptionsButtons control;	
+	private AddOptionsButtons control;	
 	@FindBy(className="modal-message")
-	ModalMessage message;
+	private ModalMessage message;
 	private final String expectedPageTitle="Out transactions";
 	@FindBy(css="h1")
-	BLabel actualTitle;
+	private BLabel actualTitle;
 	
 	private String url="http://fortest.resscode.org.ua/hb/outtransactions/add";
 	
@@ -77,5 +78,10 @@ public class PageAdd implements IPage {
 	}
 	public String getExpectedPageTitle() {
 		return expectedPageTitle;
+	}
+	public void setData(Map<String, String> testData) {
+		setName(testData.get("name"));
+		selectFirstOptionInAllCombos();
+		
 	}
 }

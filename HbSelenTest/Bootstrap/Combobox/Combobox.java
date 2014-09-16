@@ -1,5 +1,6 @@
 package Combobox;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -12,11 +13,9 @@ public class Combobox extends AbstractContainer{
 	private ComboboxHead head;
 	@FindBy(className="active-result")
 	private List<ComboboxItem> comboItems;
-	/*
-	 * probably this element will not a button in future
-	 */
 	@FindBy(className="search-choice-close")
 	private List<WebElement> unselect;
+//	private List<WebElement> unselect;
 	
 	public boolean isSelected(){
 //		try{
@@ -43,6 +42,16 @@ public class Combobox extends AbstractContainer{
 	public void selectOption(int number){
 		head.open();
 		comboItems.get(number).select();
+	}
+	public void selectOption(String name) throws IOException{
+		head.open();
+		for(ComboboxItem ci: comboItems){
+			if(ci.getValue().equals(name)){
+				ci.select();
+				return;
+			}
+		}
+		throw new IOException("No such option found: "+name);
 	}
 	
 	public int countItems(){
