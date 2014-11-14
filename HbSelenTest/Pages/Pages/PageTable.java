@@ -1,36 +1,31 @@
 package Pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-import BootstrapCore.MyFieldDecorator;
 import Paginator.NavigationButtons;
 import Paginator.RowsInfo;
 import TableOptions.TableOptionsButtons;
 
-public class PageTable implements IPage {
-	@FindBy(id="options-content")
+public abstract class PageTable extends AbstractPage {
+	@FindBy(id = "options-content")
 	TableOptionsButtons options;
-	@FindBy(className="pager")
+	@FindBy(className = "pager")
 	NavigationButtons nav;
-	@FindBy(className="pPageStat")
+	@FindBy(className = "pPageStat")
 	RowsInfo rowsInfo;
-	
-	@Override
-	public void init(WebDriver driver) {
-		PageFactory.initElements(new MyFieldDecorator(driver), this);
-	}
-	public void addNewRow(){
+
+	public void addNewRow() {
 		options.clickAdd();
 	}
-	public void lastPageTable(){
+
+	public void lastPageTable() {
 		nav.last();
 	}
-	public String getAllRowsStat(){
-		return "First row index: "+rowsInfo.firstRowOnPage()+
-			" Last row index: "+rowsInfo.lastRowOnPage()+
-			" Total count: "+rowsInfo.totalRowsCount();
+
+	public String getAllRowsStat() {
+		return "First row index: " + rowsInfo.firstRowOnPage()
+				+ " Last row index: " + rowsInfo.lastRowOnPage()
+				+ " Total count: " + rowsInfo.totalRowsCount();
 	}
 
 }

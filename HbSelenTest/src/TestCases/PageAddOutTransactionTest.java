@@ -14,20 +14,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import Pages.PageAdd;
+import Pages.PageAddOutTransaction;
 
-public class JuAddOutTransactionPage {
+public class PageAddOutTransactionTest {
 	static WebDriver w;
-	static PageAdd page;
+	static PageAddOutTransaction page;
 
 	@BeforeClass
 	public static void init() {
 		w = new FirefoxDriver();
-		page = new PageAdd();
-		page.init(w);
+		page = new PageAddOutTransaction(w);
 	}
 
-	@Ignore
 	@Test
 	public void test() throws IOException {
 		Map<String, String> testData = new HashMap<String, String>();
@@ -41,8 +39,10 @@ public class JuAddOutTransactionPage {
 				"Your data has been successfully stored into the database"));
 	}
 
+	@Ignore
 	@Test
 	public void addDescriptionTest() {
+		// page.description.write("qwer");
 		w.switchTo().defaultContent();
 		w.findElement(By.id("description_field_box"));
 		w.findElement(By.id("cke_39")).click();
