@@ -11,6 +11,10 @@ public abstract class AbstractPage implements ISitePage {
 	@FindBy(css = "h1")
 	private BLabel actualTitle;
 
+	public AbstractPage(WebDriver driver) {
+		init(driver);
+	}
+
 	public String getTitle() {
 		return actualTitle.getText();
 	}

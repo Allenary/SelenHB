@@ -11,6 +11,7 @@ import BootstrapElements.TextEditor;
 import Combobox.Combobox;
 
 public class PageAddOutTransaction extends PageAdd {
+
 	@FindBy(id = "category_id_field_box")
 	private Combobox cathegory;
 	@FindBy(id = "pocket_id_input_box")
@@ -22,7 +23,7 @@ public class PageAddOutTransaction extends PageAdd {
 	private BTextbox name;
 
 	public PageAddOutTransaction(WebDriver driver) {
-		init(driver);
+		super(driver);
 	}
 
 	public void setName(String str) {

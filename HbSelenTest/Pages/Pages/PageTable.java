@@ -1,5 +1,6 @@
 package Pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import Paginator.NavigationButtons;
@@ -13,6 +14,10 @@ public abstract class PageTable extends AbstractPage {
 	NavigationButtons nav;
 	@FindBy(className = "pPageStat")
 	RowsInfo rowsInfo;
+
+	public PageTable(WebDriver driver) {
+		super(driver);
+	}
 
 	public void addNewRow() {
 		options.clickAdd();
