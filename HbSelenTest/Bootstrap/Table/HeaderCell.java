@@ -9,6 +9,8 @@ public class HeaderCell extends AbstractElement {
 
 	public HeaderCell(final WebElement element) {
 		super(element);
+		System.out.println("initialize " + element);
+		System.out.println(getValue());
 	}
 
 	public boolean isSortable() {
