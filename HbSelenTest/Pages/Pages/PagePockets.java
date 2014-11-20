@@ -1,29 +1,23 @@
 package Pages;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-import Table.HeaderCell;
+import Table.TableHeader;
 
 public class PagePockets extends AbstractPage {
 	// @FindBy(tagName = "thead")
 	// private TableHeader header;
 	@CacheLookup
-	@FindBy(tagName = "th")
-	private List<HeaderCell> cells;
+	@FindBy(tagName = "thead")
+	private TableHeader tableHeader;
 
 	public List<String> getColumnTitles() {
-		List<String> titles = new ArrayList<String>();
-		for (HeaderCell cell : cells) {
-			String title = cell.getValue();
-			titles.add(title);
-			System.out.println(title);
-		}
-		// titles.add(cells.get(3).getValue());
+		List<String> titles = tableHeader.getColumnTitles();
+
 		return titles;
 	}
 
