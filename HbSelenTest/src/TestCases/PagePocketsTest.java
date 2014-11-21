@@ -21,7 +21,10 @@ public class PagePocketsTest {
 
 	@Test
 	public void test() {
+		System.out.println("start test");
 		List<String> titles = page.getColumnTitles();
 		System.out.println(titles);
+		List<String> values1 = page.getValuesFromRow(1);
+		System.out.println(values1);
 	}
 }

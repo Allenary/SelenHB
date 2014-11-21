@@ -7,22 +7,31 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import Table.TableHeader;
+import Table.TableRow;
 
 public class PagePockets extends AbstractPage {
-	// @FindBy(tagName = "thead")
-	// private TableHeader header;
 	@CacheLookup
 	@FindBy(tagName = "thead")
 	private TableHeader tableHeader;
 
-	public List<String> getColumnTitles() {
-		List<String> titles = tableHeader.getColumnTitles();
+	@FindBy(tagName = "tr")
+	private List<TableRow> rows;
 
-		return titles;
-	}
+	// private List<TableRow> rows;
 
 	public PagePockets(WebDriver driver) {
 		super(driver);
+	}
+
+	public List<String> getColumnTitles() {
+		List<String> titles = tableHeader.getColumnTitles();
+		return titles;
+	}
+
+	public List<String> getValuesFromRow(int rowNumber) {
+		// return row.getValues();
+		System.out.println("rows count" + rows.size());
+		return rows.get(rowNumber).getValues();
 	}
 
 	@Override
